@@ -46,6 +46,14 @@ All colors MUST be HSL.
     --shadow-card-hover: 0 8px 30px -3px hsl(162 73% 46% / 0.2);
     
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    /* Shadow Effects */
+    --shadow-elegant: 0 10px 30px -10px hsl(162 73% 46% / 0.3);
+    --shadow-glow: 0 0 40px hsl(162 73% 55% / 0.4);
+    
+    /* Mobile Safe Areas */
+    --safe-area-inset-top: env(safe-area-inset-top, 0px);
+    --safe-area-inset-bottom: env(safe-area-inset-bottom, 0px);
 
     --sidebar-background: 0 0% 98%;
 
@@ -99,6 +107,8 @@ All colors MUST be HSL.
     
     --shadow-card: 0 4px 20px -2px hsl(0 0% 0% / 0.3);
     --shadow-card-hover: 0 8px 30px -3px hsl(162 73% 46% / 0.3);
+    --shadow-elegant: 0 10px 30px -10px hsl(162 73% 46% / 0.4);
+    --shadow-glow: 0 0 40px hsl(162 73% 55% / 0.5);
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -127,16 +137,22 @@ All colors MUST be HSL.
     @apply relative overflow-hidden rounded-2xl bg-card border-2 border-border cursor-pointer;
     @apply transition-all duration-300 ease-out;
     box-shadow: var(--shadow-card);
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
   }
   
   .selection-card:hover {
-    @apply border-primary scale-105;
-    box-shadow: var(--shadow-card-hover);
+    @apply border-primary/50;
+    box-shadow: var(--shadow-elegant);
+  }
+  
+  .selection-card:active {
+    @apply scale-[0.98];
   }
   
   .selection-card.selected {
-    @apply border-primary bg-primary/5;
-    box-shadow: var(--shadow-card-hover);
+    @apply border-primary bg-primary/5 scale-[1.02];
+    box-shadow: var(--shadow-glow);
   }
   
   .gradient-text {
@@ -144,5 +160,60 @@ All colors MUST be HSL.
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    background-size: 200% auto;
+    animation: gradient-shift 3s ease infinite;
   }
+  
+  @keyframes gradient-shift {
+    0%, 100% {
+      background-position: 0% center;
+    }
+    50% {
+      background-position: 100% center;
+    }
+  }
+  
+  .shadow-elegant {
+    box-shadow: var(--shadow-elegant);
+  }
+  
+  .shadow-glow {
+    box-shadow: var(--shadow-glow);
+  }
+  
+  /* Mobile Optimizations */
+  @media (max-width: 768px) {
+    body {
+      font-size: 16px; /* Prevent iOS zoom on input focus */
+    }
+    
+    .selection-card:hover {
+      @apply scale-100; /* Disable hover scale on mobile */
+    }
+  }
+  
+  /* Touch Feedback */
+  .touch-feedback {
+    @apply transition-transform duration-150 active:scale-95;
+  }
+  
+  /* Skeleton Loading */
+  .skeleton {
+    @apply animate-pulse bg-muted rounded;
+  }
+  
+  /* Safe Area Support */
+  .safe-area-padding-top {
+    padding-top: var(--safe-area-inset-top);
+  }
+  
+  .safe-area-padding-bottom {
+    padding-bottom: var(--safe-area-inset-bottom);
+  }
+}
+
+/* Smooth Scroll */
+html {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
 }

@@ -1,6 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { QuizLayout } from "@/components/QuizLayout";
 import { SelectionCard } from "@/components/SelectionCard";
+import { VideoTransition } from "@/components/VideoTransition";
+import { BeforeAfterGallery } from "@/components/BeforeAfterGallery";
+import { SocialProof } from "@/components/SocialProof";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
@@ -23,23 +26,56 @@ const Index = () => {
   const [generating, setGenerating] = useState(false);
   const { toast } = useToast();
 
-  const totalSteps = 7;
+  const totalSteps = 9;
+
+  // Load saved progress from localStorage
+  useEffect(() => {
+    const savedData = localStorage.getItem("quizData");
+    const savedStep = localStorage.getItem("quizStep");
+    if (savedData) {
+      setQuizData(JSON.parse(savedData));
+    }
+    if (savedStep) {
+      setStep(parseInt(savedStep));
+    }
+  }, []);
+
+  // Save progress to localStorage
+  useEffect(() => {
+    if (Object.keys(quizData).length > 0) {
+      localStorage.setItem("quizData", JSON.stringify(quizData));
+      localStorage.setItem("quizStep", step.toString());
+    }
+  }, [quizData, step]);
 
   const handleSelection = (key: keyof QuizData, value: string) => {
     setQuizData({ ...quizData, [key]: value });
   };
 
   const handleNext = () => {
-    if (step === totalSteps) {
+    if (step === 7) {
+      // After step 7, show video transition
+      setStep(8);
+    } else if (step === 8) {
+      // After video transition, show before/after gallery
+      setStep(9);
+    } else if (step === 9) {
       // Generate plan
       setGenerating(true);
       setTimeout(() => {
         setGenerating(false);
+        // Clear localStorage after completion
+        localStorage.removeItem("quizData");
+        localStorage.removeItem("quizStep");
+        
+        // Redirect to video or external URL
+        window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"; // Replace with your video URL
+        
         toast({
           title: "🎉 Plano Criado!",
-          description: "Seu plano personalizado está pronto.",
+          description: "Redirecionando para seu vídeo personalizado...",
         });
-      }, 3000);
+      }, 2000);
     } else {
       setStep(step + 1);
     }
@@ -66,24 +102,51 @@ const Index = () => {
     }
   };
 
+  // Show Video Transition (Step 8)
+  if (step === 8) {
+    return (
+      <>
+        <SocialProof />
+        <VideoTransition onContinue={handleNext} />
+      </>
+    );
+  }
+
+  // Show Before/After Gallery (Step 9)
+  if (step === 9 && !generating) {
+    return (
+      <>
+        <SocialProof />
+        <BeforeAfterGallery onContinue={handleNext} />
+      </>
+    );
+  }
+
   if (generating) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center p-4">
+      <div className="min-h-screen flex flex-col items-center justify-center p-4 animate-fade-in">
         <div className="text-center space-y-6 max-w-md">
           <Loader2 className="w-16 h-16 animate-spin text-primary mx-auto" />
-          <h2 className="text-3xl font-bold">Gerando seu plano...</h2>
+          <h2 className="text-3xl font-bold gradient-text">Gerando seu plano...</h2>
           <p className="text-lg text-muted-foreground">
             Estamos criando um plano personalizado baseado nas suas respostas ✨
           </p>
+          <div className="pt-4">
+            <div className="h-2 bg-muted rounded-full overflow-hidden">
+              <div className="h-full bg-gradient-to-r from-primary to-accent animate-pulse" style={{ width: "75%" }}></div>
+            </div>
+          </div>
         </div>
       </div>
     );
   }
 
   return (
-    <QuizLayout
-      currentStep={step}
-      totalSteps={totalSteps}
+    <>
+      <SocialProof />
+      <QuizLayout
+        currentStep={step}
+        totalSteps={7}
       title={
         step === 1
           ? "Escolha seu gênero"
@@ -111,44 +174,48 @@ const Index = () => {
         {/* Step 1: Gender */}
         {step === 1 && (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div
+            <button
               onClick={() => handleSelection("gender", "male")}
-              className="cursor-pointer"
+              className="touch-feedback"
             >
               <div
                 className={`selection-card ${
                   quizData.gender === "male" ? "selected" : ""
                 }`}
               >
-                <img
-                  src={maleImage}
-                  alt="Masculino"
-                  className="w-full h-64 object-cover rounded-t-2xl"
-                />
+                <div className="aspect-[4/3] bg-muted p-4">
+                  <img
+                    src={maleImage}
+                    alt="Masculino"
+                    className="w-full h-full object-contain rounded-xl"
+                  />
+                </div>
                 <div className="p-6 text-center">
                   <h3 className="text-2xl font-bold">Masculino</h3>
                 </div>
               </div>
-            </div>
-            <div
+            </button>
+            <button
               onClick={() => handleSelection("gender", "female")}
-              className="cursor-pointer"
+              className="touch-feedback"
             >
               <div
                 className={`selection-card ${
                   quizData.gender === "female" ? "selected" : ""
                 }`}
               >
-                <img
-                  src={femaleImage}
-                  alt="Feminino"
-                  className="w-full h-64 object-cover rounded-t-2xl"
-                />
+                <div className="aspect-[4/3] bg-muted p-4">
+                  <img
+                    src={femaleImage}
+                    alt="Feminino"
+                    className="w-full h-full object-contain rounded-xl"
+                  />
+                </div>
                 <div className="p-6 text-center">
                   <h3 className="text-2xl font-bold">Feminino</h3>
                 </div>
               </div>
-            </div>
+            </button>
           </div>
         )}
 
@@ -343,15 +410,16 @@ const Index = () => {
           <Button
             onClick={handleNext}
             disabled={!canProceed()}
-            className="w-full h-14 text-lg font-semibold"
+            className="w-full h-14 text-lg font-semibold touch-feedback group"
             size="lg"
           >
-            {step === totalSteps ? "Gerar Meu Plano" : "Continuar"}
-            <ArrowRight className="ml-2 w-5 h-5" />
+            {step === 7 ? "Ver Meu Plano" : "Continuar"}
+            <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </Button>
         </div>
       </div>
-    </QuizLayout>
+      </QuizLayout>
+    </>
   );
 };
 

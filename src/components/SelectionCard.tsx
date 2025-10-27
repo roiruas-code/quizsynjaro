@@ -29,11 +29,11 @@ export const SelectionCard = ({
     >
       <div className="flex items-center gap-4">
         {image && (
-          <div className="w-20 h-20 rounded-xl overflow-hidden flex-shrink-0 bg-muted">
+          <div className="w-20 h-20 rounded-xl overflow-hidden flex-shrink-0 bg-muted p-1">
             <img
               src={image}
               alt={label}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-contain rounded-lg"
             />
           </div>
         )}
