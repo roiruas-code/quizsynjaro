@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { ChevronLeft, ChevronRight, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import transformation1 from "@/assets/transformation-1.jpg";
+import transformation1 from "@/assets/transformation-1.webp";
 import transformation2 from "@/assets/transformation-2.jpg";
-import transformation3 from "@/assets/transformation-3.jpg";
-import transformation4 from "@/assets/transformation-4.jpg";
+import transformation3 from "@/assets/transformation-3.webp";
+import transformation4 from "@/assets/transformation-4.webp";
+import transformation5 from "@/assets/transformation-5.webp";
 
 interface Transformation {
   id: number;
@@ -20,38 +21,47 @@ const transformations: Transformation[] = [
   {
     id: 1,
     image: transformation1,
-    name: "Ana Silva",
-    age: 32,
-    weight: "15 kg",
-    time: "3 meses",
-    testimonial: "Perdi 15kg e ganhei muita confiança! O plano foi perfeito para mim.",
+    name: "Valérie Dumont",
+    age: 50,
+    weight: "40 kg",
+    time: "8 meses",
+    testimonial: "Aos 50 anos consegui perder 40kg! Nunca me senti tão bem na minha vida.",
   },
   {
     id: 2,
     image: transformation2,
-    name: "Carlos Santos",
-    age: 45,
-    weight: "28 kg",
-    time: "6 meses",
-    testimonial: "Transformação completa! Me sinto 10 anos mais jovem.",
+    name: "Márcia Santos",
+    age: 52,
+    weight: "35 kg",
+    time: "7 meses",
+    testimonial: "Transformação incrível! Recuperei minha autoestima e saúde.",
   },
   {
     id: 3,
     image: transformation3,
-    name: "Mariana Costa",
-    age: 28,
-    weight: "12 kg",
-    time: "4 meses",
-    testimonial: "Finalmente consegui emagrecer de forma saudável e sustentável!",
+    name: "Carolina Lima",
+    age: 29,
+    weight: "18 kg",
+    time: "5 meses",
+    testimonial: "Resultado surpreendente! Me sinto muito mais confiante e saudável.",
   },
   {
     id: 4,
     image: transformation4,
-    name: "Pedro Lima",
-    age: 38,
-    weight: "20 kg",
-    time: "5 meses",
-    testimonial: "Mudou minha vida! Recomendo para todos.",
+    name: "Beatriz Costa",
+    age: 34,
+    weight: "22 kg",
+    time: "6 meses",
+    testimonial: "Perdi peso de forma saudável e sem sofrimento. Método realmente funciona!",
+  },
+  {
+    id: 5,
+    image: transformation5,
+    name: "Juliana Oliveira",
+    age: 41,
+    weight: "25 kg",
+    time: "6 meses",
+    testimonial: "Minha vida mudou completamente! Nunca imaginei que conseguiria.",
   },
 ];
 
