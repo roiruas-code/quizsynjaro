@@ -11,10 +11,12 @@ import femaleImage from "@/assets/female-option.jpg";
 import { QuizData } from "@/types/quiz.types";
 import { InputSlider } from "@/components/quiz/InputSlider";
 import { MultiSelectCard } from "@/components/quiz/MultiSelectCard";
-import { LoadingAnalysis } from "@/components/quiz/LoadingAnalysis";
+import { AILoadingDemo } from "@/components/quiz/AILoadingDemo";
+import { SynjaroAppDemo } from "@/components/quiz/SynjaroAppDemo";
 import { ResultsDashboard } from "@/components/quiz/ResultsDashboard";
 import { ComparisonChart } from "@/components/quiz/ComparisonChart";
 import { CheckoutPage } from "@/components/quiz/CheckoutPage";
+import { AIMessageBubble } from "@/components/quiz/AIMessageBubble";
 import { calculateAllMetrics, calculateIdealWeight } from "@/lib/calculations";
 
 const Index = () => {
@@ -119,13 +121,23 @@ const Index = () => {
     }
   };
 
-  // Loading Analysis State
+  // AI Loading Demo (analyzing state)
   if (analyzing) {
-    return <LoadingAnalysis />;
+    return <AILoadingDemo data={quizData} onComplete={() => { setAnalyzing(false); setStep(21); }} />;
   }
 
-  // Results Dashboard (Step 21)
+  // AI App Demo (Step 21)
   if (step === 21) {
+    return (
+      <>
+        <SocialProof />
+        <SynjaroAppDemo data={quizData} onContinue={handleNext} />
+      </>
+    );
+  }
+
+  // Results Dashboard (Step 22)
+  if (step === 22) {
     return (
       <>
         <SocialProof />
@@ -137,7 +149,7 @@ const Index = () => {
               size="lg"
               className="w-full h-14 text-lg font-semibold"
             >
-              Ver Minha Jornada de Transformação
+              Ver Comparação de Cenários
               <ArrowRight className="ml-2 w-5 h-5" />
             </Button>
           </div>
@@ -146,8 +158,8 @@ const Index = () => {
     );
   }
 
-  // Comparison Chart (Step 22)
-  if (step === 22) {
+  // Comparison Chart (Step 23)
+  if (step === 23) {
     return (
       <>
         <SocialProof />
@@ -168,8 +180,8 @@ const Index = () => {
     );
   }
 
-  // Enhanced Gallery (Step 23-24)
-  if (step === 23 || step === 24) {
+  // Enhanced Gallery (Step 24)
+  if (step === 24) {
     return (
       <>
         <SocialProof />
@@ -187,11 +199,11 @@ const Index = () => {
 
   const getStepTitle = () => {
     const titles: { [key: number]: string } = {
-      1: "Escolha seu gênero",
-      2: "Qual é a sua idade? 📅",
-      3: "Qual é a sua altura? 📏",
-      4: "Qual é o seu peso atual? ⚖️",
-      5: "Qual é o seu peso ideal? 🎯",
+      1: "👋 Para quem é o plano?",
+      2: "📅 Qual é a sua idade?",
+      3: "📏 Sua altura",
+      4: "⚖️ Peso atual",
+      5: "🎯 Seu peso dos sonhos",
       6: "Quais são suas áreas problemáticas? 🎯",
       7: "Qual é o formato do seu corpo? 👤",
       8: "Quando foi a última vez que teve o peso ideal? ⏰",
@@ -227,7 +239,7 @@ const Index = () => {
       <SocialProof />
       <QuizLayout
         currentStep={step}
-        totalSteps={20}
+        totalSteps={totalSteps}
         title={getStepTitle()}
         subtitle={getStepSubtitle()}
       >
@@ -430,6 +442,7 @@ const Index = () => {
               <SelectionCard emoji="1️⃣" label="Sim, 1-2 vezes" selected={quizData.previousAttempts === "1-2"} onClick={() => handleSelection("previousAttempts", "1-2")} />
               <SelectionCard emoji="3️⃣" label="Sim, 3-5 vezes" selected={quizData.previousAttempts === "3-5"} onClick={() => handleSelection("previousAttempts", "3-5")} />
               <SelectionCard emoji="🔁" label="Sim, várias vezes" selected={quizData.previousAttempts === "many"} onClick={() => handleSelection("previousAttempts", "many")} />
+              <AIMessageBubble message="Perfeito! Com seu histórico, vou evitar erros do passado. A IA Synjaro vai sugerir chás termogênicos ideais para acelerar seu metabolismo de forma personalizada." />
             </>
           )}
 

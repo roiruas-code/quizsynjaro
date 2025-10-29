@@ -192,6 +192,18 @@ All colors MUST be HSL.
     }
   }
   
+  /* Mobile Responsive Text */
+  @media (max-width: 640px) {
+    .selection-card h3 {
+      font-size: 1.125rem; /* Reduce from 2xl to lg */
+    }
+    
+    .gradient-text {
+      font-size: 1.875rem; /* Reduce main titles */
+      line-height: 1.2;
+    }
+  }
+  
   /* Touch Feedback */
   .touch-feedback {
     @apply transition-transform duration-150 active:scale-95;

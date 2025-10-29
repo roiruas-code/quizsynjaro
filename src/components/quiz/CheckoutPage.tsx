@@ -1,6 +1,6 @@
 import { QuizData } from "@/types/quiz.types";
 import { Button } from "@/components/ui/button";
-import { Check, Clock, Shield, Star, Zap } from "lucide-react";
+import { Check, Clock, Shield, Star, Zap, X, Coffee, TrendingDown, Sparkles } from "lucide-react";
 import { useState, useEffect } from "react";
 import {
   Accordion,
@@ -33,65 +33,31 @@ export const CheckoutPage = ({ data, onCheckout }: CheckoutPageProps) => {
 
   const faqs = [
     {
-      question: "Como funciona o plano?",
+      question: "Como funciona o app Synjaro?",
       answer:
-        "Você receberá um plano completo e personalizado com refeições balanceadas, exercícios adaptados ao seu nível e acompanhamento profissional para garantir seus resultados.",
+        "O Synjaro é um aplicativo com inteligência artificial que cria um plano 100% personalizado para você. A IA sugere chás naturais e receitas com ingredientes caseiros, acompanha seu progresso e te motiva diariamente com notificações inteligentes.",
+    },
+    {
+      question: "Preciso comprar ingredientes caros?",
+      answer:
+        "Não! Toda a proposta do Synjaro é usar ingredientes que você já tem em casa ou que encontra em qualquer mercado: chá verde, hibisco, gengibre, ovos, arroz integral, feijão, frango, etc. Nada de superalimentos caros ou produtos milagrosos.",
     },
     {
       question: "Quanto tempo até ver resultados?",
       answer:
-        "A maioria das pessoas começa a ver resultados visíveis nas primeiras 2-3 semanas. Seu plano projeta que você alcançará sua meta em aproximadamente " +
-        months +
-        " meses.",
+        "A maioria das pessoas começa a ver resultados visíveis nas primeiras 2-3 semanas. A IA calcula que você alcançará sua meta de " + weightToLose.toFixed(1) + "kg em aproximadamente " + months + " meses com o plano personalizado.",
     },
     {
-      question: "Preciso de equipamentos especiais?",
+      question: "E se eu não gostar do app?",
       answer:
-        "Não! Nossos exercícios podem ser feitos em casa sem equipamentos ou adaptados para academia caso você prefira.",
+        "Oferecemos garantia de 30 dias. Se você não estiver satisfeito com o Synjaro, devolvemos 100% do seu investimento, sem perguntas.",
     },
     {
-      question: "E se eu não gostar do plano?",
+      question: "A IA realmente funciona?",
       answer:
-        "Oferecemos garantia de 30 dias. Se você não estiver satisfeito, devolvemos 100% do seu investimento, sem perguntas.",
-    },
-    {
-      question: "Vou passar fome?",
-      answer:
-        "Absolutamente não! Nosso método é baseado em alimentação balanceada e sustentável. Você comerá bem e ainda assim emagrecerá de forma saudável.",
+        "Sim! A IA Synjaro analisa 25+ informações sobre você (peso, altura, idade, rotina, preferências) e usa fórmulas científicas (BMR, TDEE, déficit calórico) para criar um plano único. Ela aprende com você e ajusta as sugestões conforme você evolui.",
     },
   ];
-
-  const bonuses = [
-    {
-      icon: "📱",
-      title: "App de Acompanhamento",
-      value: "R$ 197",
-      description: "Acompanhe seu progresso diariamente",
-    },
-    {
-      icon: "📚",
-      title: "Guia de Receitas Saudáveis",
-      value: "R$ 97",
-      description: "100+ receitas deliciosas e nutritivas",
-    },
-    {
-      icon: "🎯",
-      title: "Plano de Treino Personalizado",
-      value: "R$ 297",
-      description: "Exercícios adaptados ao seu nível",
-    },
-    {
-      icon: "👨‍⚕️",
-      title: "Suporte Nutricional",
-      value: "R$ 497",
-      description: "Tire dúvidas com especialistas",
-    },
-  ];
-
-  const totalBonusValue = bonuses.reduce(
-    (acc, bonus) => acc + parseInt(bonus.value.replace(/\D/g, "")),
-    0
-  );
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4 py-12 bg-gradient-to-b from-background to-muted/20">
@@ -111,97 +77,222 @@ export const CheckoutPage = ({ data, onCheckout }: CheckoutPageProps) => {
 
         {/* Header */}
         <div className="text-center space-y-4">
+          <div className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-primary to-accent text-white rounded-full font-bold text-lg">
+            <span className="animate-pulse">🔥</span>
+            Tenha a IA Synjaro no Seu Bolso
+            <span className="animate-pulse">🔥</span>
+          </div>
           <h1 className="text-4xl md:text-5xl font-bold gradient-text">
-            🎉 Seu Plano Está Pronto!
+            📱 Seu Aplicativo de Emagrecimento Personalizado
           </h1>
           <p className="text-xl text-muted-foreground">
-            Transforme seu corpo em apenas {months} meses
+            A IA que sugere chás e receitas PARA VOCÊ, todos os dias
           </p>
         </div>
 
-        {/* Plan Recap */}
+        {/* Recap do Plano */}
         <div className="bg-card border-2 border-primary/30 rounded-2xl p-8 space-y-6 shadow-elegant">
-          <div className="text-center">
-            <h2 className="text-2xl font-bold text-foreground mb-4">
-              📋 Resumo do Seu Plano Personalizado
-            </h2>
-          </div>
+          <h2 className="text-2xl font-bold text-center text-foreground">
+            📋 O Que Você Vai Receber no Synjaro
+          </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="bg-primary/5 rounded-xl p-6 text-center space-y-2">
-              <p className="text-sm text-muted-foreground">Você Vai Perder</p>
-              <p className="text-4xl font-bold text-primary">
-                {weightToLose.toFixed(1)} kg
-              </p>
-            </div>
-
-            <div className="bg-accent/5 rounded-xl p-6 text-center space-y-2">
-              <p className="text-sm text-muted-foreground">Em Apenas</p>
-              <p className="text-4xl font-bold text-accent">
-                {months} {months === 1 ? "mês" : "meses"}
-              </p>
-            </div>
-
-            <div className="bg-success/5 rounded-xl p-6 text-center space-y-2">
-              <p className="text-sm text-muted-foreground">Calorias Diárias</p>
-              <p className="text-4xl font-bold text-success">
-                {((data.tdee || 0) - (data.calorieDeficit || 0)).toLocaleString()}
-              </p>
-            </div>
-          </div>
-
-          <div className="border-t border-border pt-6 space-y-3">
-            <h3 className="font-bold text-foreground text-lg">
-              ✅ O Que Está Incluído:
-            </h3>
-            <ul className="space-y-2">
-              {[
-                "Plano alimentar 100% personalizado para você",
-                "Cardápio semanal com receitas práticas",
-                "Treinos adaptados ao seu nível de atividade",
-                "Lista de compras automática",
-                "Calculadora nutricional inteligente",
-                "Acompanhamento de progresso em tempo real",
-                "Suporte profissional via chat",
-                "Atualizações mensais do seu plano",
-              ].map((item, index) => (
-                <li key={index} className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                  <span className="text-foreground">{item}</span>
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="space-y-4">
+              <h3 className="font-bold flex items-center gap-2 text-foreground">
+                <Coffee className="w-5 h-5 text-primary" />
+                Chás Personalizados pela IA
+              </h3>
+              <ul className="space-y-2 text-sm">
+                <li className="flex gap-2">
+                  <Check className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
+                  <span className="text-muted-foreground">3 chás por dia adaptados ao SEU metabolismo</span>
                 </li>
-              ))}
-            </ul>
+                <li className="flex gap-2">
+                  <Check className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
+                  <span className="text-muted-foreground">Ingredientes que você JÁ TEM em casa (chá verde, hibisco, gengibre, etc)</span>
+                </li>
+                <li className="flex gap-2">
+                  <Check className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
+                  <span className="text-muted-foreground">Horários calculados para máxima eficácia</span>
+                </li>
+                <li className="flex gap-2">
+                  <Check className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
+                  <span className="text-muted-foreground">Benefícios específicos (acelera metabolismo, reduz inchaço, melhora sono)</span>
+                </li>
+              </ul>
+            </div>
+
+            <div className="space-y-4">
+              <h3 className="font-bold flex items-center gap-2 text-foreground">
+                <span className="text-xl">🥗</span>
+                Alimentação Inteligente
+              </h3>
+              <ul className="space-y-2 text-sm">
+                <li className="flex gap-2">
+                  <Check className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
+                  <span className="text-muted-foreground">Cardápio diário com comida DE VERDADE</span>
+                </li>
+                <li className="flex gap-2">
+                  <Check className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
+                  <span className="text-muted-foreground">Receitas simples com ingredientes do mercado comum</span>
+                </li>
+                <li className="flex gap-2">
+                  <Check className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
+                  <span className="text-muted-foreground">Lista de compras automática e econômica</span>
+                </li>
+                <li className="flex gap-2">
+                  <Check className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
+                  <span className="text-muted-foreground">Calorias calculadas precisamente para VOCÊ</span>
+                </li>
+              </ul>
+            </div>
+
+            <div className="space-y-4">
+              <h3 className="font-bold flex items-center gap-2 text-foreground">
+                <TrendingDown className="w-5 h-5 text-primary" />
+                Gráficos e Acompanhamento
+              </h3>
+              <ul className="space-y-2 text-sm">
+                <li className="flex gap-2">
+                  <Check className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
+                  <span className="text-muted-foreground">Visualize seu progresso em tempo real</span>
+                </li>
+                <li className="flex gap-2">
+                  <Check className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
+                  <span className="text-muted-foreground">Gráficos de peso, calorias e conquistas</span>
+                </li>
+                <li className="flex gap-2">
+                  <Check className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
+                  <span className="text-muted-foreground">Badges de motivação ao atingir metas</span>
+                </li>
+                <li className="flex gap-2">
+                  <Check className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
+                  <span className="text-muted-foreground">Sistema de gamificação para te manter motivada</span>
+                </li>
+              </ul>
+            </div>
+
+            <div className="space-y-4">
+              <h3 className="font-bold flex items-center gap-2 text-foreground">
+                <Sparkles className="w-5 h-5 text-primary" />
+                IA 24/7 ao Seu Lado
+              </h3>
+              <ul className="space-y-2 text-sm">
+                <li className="flex gap-2">
+                  <Check className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
+                  <span className="text-muted-foreground">Sugestões personalizadas TODOS os dias</span>
+                </li>
+                <li className="flex gap-2">
+                  <Check className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
+                  <span className="text-muted-foreground">Ajustes automáticos conforme você evolui</span>
+                </li>
+                <li className="flex gap-2">
+                  <Check className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
+                  <span className="text-muted-foreground">Aprende com seus hábitos e preferências</span>
+                </li>
+                <li className="flex gap-2">
+                  <Check className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
+                  <span className="text-muted-foreground">Notificações inteligentes nos horários certos</span>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
 
-        {/* Bonuses */}
-        <div className="bg-gradient-to-r from-primary/10 to-accent/10 border border-primary/20 rounded-2xl p-8 space-y-6">
-          <div className="text-center">
-            <h2 className="text-2xl font-bold text-foreground mb-2">
-              🎁 Bônus Exclusivos (Grátis!)
-            </h2>
-            <p className="text-muted-foreground">
-              Valor total: <span className="line-through">R$ {totalBonusValue}</span>{" "}
-              <span className="text-primary font-bold text-xl">GRÁTIS</span>
-            </p>
+        {/* Por Que Synjaro Funciona */}
+        <div className="bg-gradient-to-r from-primary/10 to-accent/10 border border-primary/20 rounded-2xl p-8">
+          <h2 className="text-2xl font-bold text-center mb-6 text-foreground">
+            🔬 Por Que o Synjaro Funciona?
+          </h2>
+
+          <div className="grid md:grid-cols-3 gap-6">
+            <div className="text-center space-y-3">
+              <div className="text-5xl">🤖</div>
+              <h3 className="font-bold text-foreground">IA Personalizada</h3>
+              <p className="text-sm text-muted-foreground">
+                Não é um plano genérico. A IA analisa 25+ pontos sobre VOCÊ e cria 
+                sugestões únicas baseadas no seu corpo, rotina e objetivos.
+              </p>
+            </div>
+
+            <div className="text-center space-y-3">
+              <div className="text-5xl">🏠</div>
+              <h3 className="font-bold text-foreground">Ingredientes Caseiros</h3>
+              <p className="text-sm text-muted-foreground">
+                Chá verde, hibisco, gengibre, ovos, arroz integral, feijão... 
+                Tudo que você já tem (ou deveria ter) em casa. Nada de produtos caros!
+              </p>
+            </div>
+
+            <div className="text-center space-y-3">
+              <div className="text-5xl">📊</div>
+              <h3 className="font-bold text-foreground">Ciência + Gamificação</h3>
+              <p className="text-sm text-muted-foreground">
+                Cálculos de BMR, TDEE e déficit calórico + gráficos motivacionais + 
+                badges de conquista = você fica engajada e vê resultados reais!
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Comparação Com vs Sem */}
+        <div className="grid md:grid-cols-2 gap-6">
+          <div className="bg-muted/50 border border-border rounded-xl p-6 space-y-4">
+            <h3 className="font-bold text-center flex items-center justify-center gap-2 text-foreground">
+              <X className="w-6 h-6 text-destructive" />
+              Sem o Synjaro
+            </h3>
+            <ul className="space-y-3 text-sm">
+              <li className="flex gap-2 items-start">
+                <span className="text-destructive">❌</span>
+                <span className="text-muted-foreground">Dietas genéricas da internet</span>
+              </li>
+              <li className="flex gap-2 items-start">
+                <span className="text-destructive">❌</span>
+                <span className="text-muted-foreground">Não sabe qual chá tomar e quando</span>
+              </li>
+              <li className="flex gap-2 items-start">
+                <span className="text-destructive">❌</span>
+                <span className="text-muted-foreground">Gastar com produtos "emagrecedores" caros</span>
+              </li>
+              <li className="flex gap-2 items-start">
+                <span className="text-destructive">❌</span>
+                <span className="text-muted-foreground">Fazer tudo sozinha, sem acompanhamento</span>
+              </li>
+              <li className="flex gap-2 items-start">
+                <span className="text-destructive">❌</span>
+                <span className="text-muted-foreground">Desistir na primeira dificuldade</span>
+              </li>
+            </ul>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {bonuses.map((bonus, index) => (
-              <div
-                key={index}
-                className="bg-card border border-border rounded-xl p-6 space-y-2"
-              >
-                <div className="text-4xl mb-2">{bonus.icon}</div>
-                <h3 className="font-bold text-foreground">{bonus.title}</h3>
-                <p className="text-sm text-muted-foreground">
-                  {bonus.description}
-                </p>
-                <p className="text-primary font-bold">
-                  Valor: <span className="line-through text-muted-foreground">{bonus.value}</span> GRÁTIS
-                </p>
-              </div>
-            ))}
+          <div className="bg-primary/10 border-2 border-primary rounded-xl p-6 space-y-4">
+            <h3 className="font-bold text-center flex items-center justify-center gap-2 text-foreground">
+              <Check className="w-6 h-6 text-primary" />
+              Com o Synjaro
+            </h3>
+            <ul className="space-y-3 text-sm">
+              <li className="flex gap-2 items-start">
+                <span className="text-primary">✅</span>
+                <span className="text-foreground font-medium">Plano 100% personalizado para VOCÊ</span>
+              </li>
+              <li className="flex gap-2 items-start">
+                <span className="text-primary">✅</span>
+                <span className="text-foreground font-medium">IA te guia: qual chá, qual horário, qual receita</span>
+              </li>
+              <li className="flex gap-2 items-start">
+                <span className="text-primary">✅</span>
+                <span className="text-foreground font-medium">Ingredientes que você JÁ TEM em casa</span>
+              </li>
+              <li className="flex gap-2 items-start">
+                <span className="text-primary">✅</span>
+                <span className="text-foreground font-medium">App te acompanha 24/7 e motiva diariamente</span>
+              </li>
+              <li className="flex gap-2 items-start">
+                <span className="text-primary">✅</span>
+                <span className="text-foreground font-medium">Gráficos mostram evolução = você se mantém motivada</span>
+              </li>
+            </ul>
           </div>
         </div>
 
@@ -209,29 +300,31 @@ export const CheckoutPage = ({ data, onCheckout }: CheckoutPageProps) => {
         <div className="bg-card border-2 border-primary rounded-2xl p-8 space-y-6 shadow-elegant">
           <div className="text-center space-y-4">
             <div className="flex items-center justify-center gap-2">
-              <Star className="w-6 h-6 fill-yellow-500 text-yellow-500" />
-              <Star className="w-6 h-6 fill-yellow-500 text-yellow-500" />
-              <Star className="w-6 h-6 fill-yellow-500 text-yellow-500" />
-              <Star className="w-6 h-6 fill-yellow-500 text-yellow-500" />
-              <Star className="w-6 h-6 fill-yellow-500 text-yellow-500" />
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} className="w-6 h-6 fill-yellow-500 text-yellow-500" />
+              ))}
             </div>
             <p className="text-sm text-muted-foreground">
               Avaliação média de 12.487 clientes
             </p>
 
             <div>
-              <p className="text-muted-foreground line-through text-xl">
-                De R$ 497,00
+              <p className="text-muted-foreground">
+                Investimento para ter a IA ao seu lado:
               </p>
-              <p className="text-5xl font-bold gradient-text">R$ 97,00</p>
+              <p className="line-through text-muted-foreground text-xl mt-2">
+                R$ 497,00 (valor de mercado de apps com IA)
+              </p>
+              <p className="text-5xl font-bold gradient-text my-2">R$ 97,00</p>
               <p className="text-muted-foreground">
                 ou 12x de R$ 9,70 sem juros
               </p>
             </div>
 
-            <div className="bg-primary/5 border border-primary/20 rounded-xl p-4">
+            <div className="bg-primary/10 border border-primary/20 rounded-xl p-4 max-w-md mx-auto">
               <p className="text-sm text-foreground">
-                🔥 <span className="font-bold">Desconto de 80%</span> apenas para os primeiros 50 inscritos hoje
+                💡 <span className="font-bold">Menos de R$ 3,50 por dia</span> para ter uma IA 
+                personal trainer + nutricionista no seu bolso!
               </p>
             </div>
           </div>
@@ -242,7 +335,7 @@ export const CheckoutPage = ({ data, onCheckout }: CheckoutPageProps) => {
             className="w-full h-16 text-xl font-bold animate-pulse hover:animate-none"
           >
             <Zap className="w-6 h-6 mr-2" />
-            Começar Minha Transformação Agora
+            🚀 Quero a IA Synjaro Comigo Agora!
           </Button>
 
           <div className="flex items-center justify-center gap-6 text-sm text-muted-foreground">
@@ -258,15 +351,14 @@ export const CheckoutPage = ({ data, onCheckout }: CheckoutPageProps) => {
         </div>
 
         {/* Guarantee */}
-        <div className="bg-gradient-to-r from-success/10 to-primary/10 border border-success/20 rounded-2xl p-8 text-center space-y-4">
-          <Shield className="w-16 h-16 mx-auto text-success" />
+        <div className="bg-gradient-to-r from-green-500/10 to-primary/10 border border-green-500/20 rounded-2xl p-8 text-center space-y-4">
+          <Shield className="w-16 h-16 mx-auto text-green-600 dark:text-green-400" />
           <h3 className="text-2xl font-bold text-foreground">
             🛡️ Garantia Incondicional de 30 Dias
           </h3>
           <p className="text-lg text-foreground max-w-2xl mx-auto">
-            Se você não estiver completamente satisfeito com os resultados, basta nos
-            enviar um email e devolveremos 100% do seu dinheiro. Sem perguntas, sem
-            complicações.
+            Teste o Synjaro sem risco! Se você não estiver completamente satisfeito com os resultados, 
+            devolvemos 100% do seu dinheiro. Sem perguntas, sem complicações.
           </p>
         </div>
 
@@ -300,7 +392,7 @@ export const CheckoutPage = ({ data, onCheckout }: CheckoutPageProps) => {
             🚀 Sim, Quero Transformar Meu Corpo Agora!
           </Button>
           <p className="text-sm text-muted-foreground">
-            Junte-se a mais de 12.487 pessoas que já transformaram suas vidas
+            Junte-se a mais de 12.487 pessoas que já transformaram suas vidas com o Synjaro
           </p>
         </div>
       </div>

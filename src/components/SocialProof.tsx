@@ -2,11 +2,14 @@ import { useEffect, useState } from "react";
 import { CheckCircle2 } from "lucide-react";
 
 const notifications = [
-  { name: "Maria", location: "São Paulo", action: "completou o quiz" },
-  { name: "João", location: "Rio de Janeiro", action: "iniciou o plano" },
-  { name: "Ana", location: "Belo Horizonte", action: "perdeu 5kg" },
-  { name: "Carlos", location: "Brasília", action: "completou o quiz" },
-  { name: "Fernanda", location: "Curitiba", action: "iniciou o plano" },
+  { name: "Maria", location: "São Paulo", action: "perdeu 8kg em 3 meses", icon: "🎉" },
+  { name: "João", location: "Rio de Janeiro", action: "completou o plano", icon: "✅" },
+  { name: "Ana", location: "Belo Horizonte", action: "está adorando as receitas", icon: "❤️" },
+  { name: "Carlos", location: "Brasília", action: "perdeu 5kg na primeira semana", icon: "💪" },
+  { name: "Fernanda", location: "Curitiba", action: "acabou de se inscrever", icon: "🚀" },
+  { name: "Patricia", location: "Porto Alegre", action: "atingiu sua meta de peso", icon: "🎯" },
+  { name: "Roberto", location: "Salvador", action: "renovou por mais 3 meses", icon: "🔄" },
+  { name: "Camila", location: "Fortaleza", action: "recomendou para 3 amigas", icon: "👥" },
 ];
 
 export const SocialProof = () => {
@@ -35,7 +38,7 @@ export const SocialProof = () => {
     >
       <div className="bg-card border border-border rounded-lg shadow-elegant p-4 flex items-start gap-3">
         <div className="flex-shrink-0">
-          <CheckCircle2 className="w-5 h-5 text-green-500" />
+          <div className="text-2xl">{notification.icon}</div>
         </div>
         <div className="flex-1 min-w-0">
           <p className="text-sm font-medium text-foreground">

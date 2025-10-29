@@ -25,7 +25,7 @@ const transformations: Transformation[] = [
     age: 50,
     weight: "40 kg",
     time: "8 meses",
-    testimonial: "Aos 50 anos consegui perder 40kg! Nunca me senti tão bem na minha vida.",
+    testimonial: "Aos 50 anos consegui perder 40kg com o Synjaro! A IA me ajudou a escolher os chás certos e as receitas perfeitas. Nunca me senti tão bem na minha vida.",
   },
   {
     id: 2,
@@ -34,7 +34,7 @@ const transformations: Transformation[] = [
     age: 52,
     weight: "35 kg",
     time: "7 meses",
-    testimonial: "Transformação incrível! Recuperei minha autoestima e saúde.",
+    testimonial: "A IA Synjaro personalizou tudo para mim! Os chás naturais e as receitas com ingredientes caseiros fizeram toda diferença.",
   },
   {
     id: 3,
@@ -43,7 +43,7 @@ const transformations: Transformation[] = [
     age: 29,
     weight: "18 kg",
     time: "5 meses",
-    testimonial: "Resultado surpreendente! Me sinto muito mais confiante e saudável.",
+    testimonial: "Ter a IA no meu bolso mudou tudo! Todos os dias recebia sugestões personalizadas de chás e alimentação.",
   },
   {
     id: 4,
@@ -52,7 +52,7 @@ const transformations: Transformation[] = [
     age: 34,
     weight: "22 kg",
     time: "6 meses",
-    testimonial: "Perdi peso de forma saudável e sem sofrimento. Método realmente funciona!",
+    testimonial: "O Synjaro é incrível! Só usei ingredientes que tinha em casa e os gráficos me mantiveram motivada todos os dias.",
   },
   {
     id: 5,
@@ -61,7 +61,7 @@ const transformations: Transformation[] = [
     age: 41,
     weight: "25 kg",
     time: "6 meses",
-    testimonial: "Minha vida mudou completamente! Nunca imaginei que conseguiria.",
+    testimonial: "A inteligência artificial do Synjaro aprendeu comigo! Os chás personalizados aceleraram meus resultados.",
   },
 ];
 
@@ -88,10 +88,10 @@ export const BeforeAfterGallery = ({ onContinue }: BeforeAfterGalleryProps) => {
         {/* Header */}
         <div className="text-center space-y-4">
           <h2 className="text-3xl md:text-4xl font-bold gradient-text">
-            ✨ Transformações Reais
+            ✨ Transformações Reais com Synjaro
           </h2>
           <p className="text-lg text-muted-foreground">
-            Veja os resultados incríveis de quem já seguiu o plano
+            Resultados incríveis de quem usou o app com IA personalizada
           </p>
         </div>
 
@@ -103,10 +103,14 @@ export const BeforeAfterGallery = ({ onContinue }: BeforeAfterGalleryProps) => {
               <img
                 src={current.image}
                 alt={`Transformação de ${current.name}`}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-contain"
               />
               <div className="absolute top-4 left-4 bg-primary text-primary-foreground px-4 py-2 rounded-full text-sm font-semibold">
                 Antes e Depois
+              </div>
+              <div className="absolute top-4 right-4 bg-gradient-to-r from-primary to-accent text-white px-4 py-2 rounded-full text-xs font-bold flex items-center gap-1">
+                <span>🤖</span>
+                <span>Usuária Synjaro</span>
               </div>
             </div>
 
@@ -179,10 +183,10 @@ export const BeforeAfterGallery = ({ onContinue }: BeforeAfterGalleryProps) => {
             size="lg"
             className="w-full md:w-auto px-12 h-14 text-lg font-semibold"
           >
-            Começar Minha Transformação
+            🤖 Quero a IA Synjaro Comigo!
           </Button>
           <p className="text-sm text-muted-foreground">
-            Junte-se a mais de 12.000 pessoas que já transformaram suas vidas
+            Junte-se a mais de 12.000 pessoas que já transformaram suas vidas com o Synjaro
           </p>
         </div>
       </div>
