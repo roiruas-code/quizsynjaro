@@ -3,12 +3,12 @@ import { Progress } from "@/components/ui/progress";
 import { Check } from "lucide-react";
 
 const analysisSteps = [
-  "Analisando seu perfil físico...",
-  "Calculando sua taxa metabólica...",
-  "Avaliando seus hábitos alimentares...",
-  "Determinando suas necessidades calóricas...",
-  "Criando projeção de resultados...",
-  "Personalizando seu plano de emagrecimento...",
+  "Analyzing your physical profile...",
+  "Calculating your metabolic rate...",
+  "Evaluating your eating habits...",
+  "Determining your calorie needs...",
+  "Creating results projection...",
+  "Personalizing your weight loss plan...",
 ];
 
 export const LoadingAnalysis = () => {
@@ -16,9 +16,9 @@ export const LoadingAnalysis = () => {
   const [currentStep, setCurrentStep] = useState(0);
 
   useEffect(() => {
-    const stepDuration = 800; // ms por etapa
+    const stepDuration = 800;
     const totalDuration = stepDuration * analysisSteps.length;
-    const interval = 50; // atualização a cada 50ms
+    const interval = 50;
 
     const progressTimer = setInterval(() => {
       setProgress((prev) => {
@@ -47,42 +47,42 @@ export const LoadingAnalysis = () => {
   }, []);
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4">
-      <div className="w-full max-w-2xl space-y-8">
+    <div className="min-h-screen flex items-center justify-center p-4 safe-area-inset">
+      <div className="w-full max-w-md space-y-6">
         {/* Header */}
-        <div className="text-center space-y-4">
-          <div className="w-20 h-20 mx-auto rounded-full bg-primary/10 flex items-center justify-center animate-pulse">
-            <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center">
-              <div className="w-6 h-6 rounded-full bg-primary animate-ping" />
+        <div className="text-center space-y-3">
+          <div className="w-16 h-16 mx-auto rounded-full bg-primary/10 flex items-center justify-center animate-pulse">
+            <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center">
+              <div className="w-5 h-5 rounded-full bg-primary animate-ping" />
             </div>
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold gradient-text">
-            🧠 Analisando Seus Dados
+          <h2 className="text-2xl font-bold gradient-text">
+            🧠 Analyzing Your Data
           </h2>
-          <p className="text-lg text-muted-foreground">
-            Aguarde enquanto criamos seu plano personalizado
+          <p className="text-sm text-muted-foreground">
+            Please wait while we create your personalized plan
           </p>
         </div>
 
         {/* Progress Bar */}
-        <div className="space-y-4">
+        <div className="space-y-2">
           <Progress value={progress} className="h-3" />
-          <p className="text-center text-sm text-muted-foreground font-semibold">
-            {Math.round(progress)}% concluído
+          <p className="text-center text-xs text-muted-foreground font-semibold">
+            {Math.round(progress)}% complete
           </p>
         </div>
 
         {/* Steps */}
-        <div className="space-y-3 bg-card border border-border rounded-2xl p-6">
+        <div className="space-y-2 bg-card border border-border rounded-2xl p-4">
           {analysisSteps.map((step, index) => (
             <div
               key={index}
-              className={`flex items-center gap-3 transition-all duration-500 ${
+              className={`flex items-center gap-2 transition-all duration-500 ${
                 index <= currentStep ? "opacity-100" : "opacity-30"
               }`}
             >
               <div
-                className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-colors ${
+                className={`flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center transition-colors ${
                   index < currentStep
                     ? "bg-primary text-primary-foreground"
                     : index === currentStep
@@ -91,13 +91,13 @@ export const LoadingAnalysis = () => {
                 }`}
               >
                 {index < currentStep ? (
-                  <Check className="w-5 h-5" />
+                  <Check className="w-4 h-4" />
                 ) : (
-                  <span className="text-sm font-bold">{index + 1}</span>
+                  <span className="text-xs font-bold">{index + 1}</span>
                 )}
               </div>
               <p
-                className={`text-base ${
+                className={`text-sm ${
                   index <= currentStep
                     ? "text-foreground font-semibold"
                     : "text-muted-foreground"
@@ -110,9 +110,9 @@ export const LoadingAnalysis = () => {
         </div>
 
         {/* Motivational Message */}
-        <div className="text-center p-6 bg-primary/5 border border-primary/20 rounded-2xl">
-          <p className="text-lg font-semibold text-foreground">
-            ✨ Você está a poucos passos da sua transformação!
+        <div className="text-center p-4 bg-primary/5 border border-primary/20 rounded-2xl">
+          <p className="text-sm font-semibold text-foreground">
+            ✨ You're just a few steps away from your transformation!
           </p>
         </div>
       </div>
