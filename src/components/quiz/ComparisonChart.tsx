@@ -26,18 +26,18 @@ export const ComparisonChart = ({ data }: ComparisonChartProps) => {
 
   const chartData = [
     {
-      scenario: "Começar Hoje",
-      pesoFinal: data.goalWeight,
-      dataFinal: startTodayEndDate.toLocaleDateString("pt-BR", {
+      scenario: "Start Today",
+      finalWeight: data.goalWeight,
+      endDate: startTodayEndDate.toLocaleDateString("en-US", {
         month: "short",
         year: "numeric",
       }),
       color: "hsl(var(--primary))",
     },
     {
-      scenario: "Começar em 6 Meses",
-      pesoFinal: data.currentWeight, // Ainda no peso atual
-      dataFinal: delayedStartDate.toLocaleDateString("pt-BR", {
+      scenario: "Start in 6 Months",
+      finalWeight: data.currentWeight,
+      endDate: delayedStartDate.toLocaleDateString("en-US", {
         month: "short",
         year: "numeric",
       }),
@@ -48,35 +48,36 @@ export const ComparisonChart = ({ data }: ComparisonChartProps) => {
   const weightDifference = data.currentWeight - data.goalWeight;
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 py-12">
-      <div className="w-full max-w-5xl space-y-8">
+    <div className="min-h-screen flex items-center justify-center p-4 py-8 pb-24 safe-area-inset">
+      <div className="w-full max-w-md space-y-6">
         {/* Header */}
-        <div className="text-center space-y-4">
-          <h2 className="text-3xl md:text-4xl font-bold gradient-text">
-            ⚖️ O Custo de Esperar
+        <div className="text-center space-y-2">
+          <h2 className="text-2xl font-bold gradient-text">
+            ⚖️ The Cost of Waiting
           </h2>
-          <p className="text-lg text-muted-foreground">
-            Veja a diferença entre agir agora e adiar sua transformação
+          <p className="text-sm text-muted-foreground">
+            See the difference between acting now and delaying your transformation
           </p>
         </div>
 
         {/* Comparison Chart */}
-        <div className="bg-card border border-border rounded-2xl p-6 md:p-8 space-y-6">
-          <h3 className="text-xl font-bold text-foreground text-center">
-            📊 Comparação de Cenários
+        <div className="bg-card border border-border rounded-2xl p-4 space-y-4">
+          <h3 className="text-base font-bold text-foreground text-center">
+            📊 Scenario Comparison
           </h3>
 
-          <ResponsiveContainer width="100%" height={350}>
+          <ResponsiveContainer width="100%" height={250}>
             <BarChart data={chartData}>
               <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
               <XAxis
                 dataKey="scenario"
                 stroke="hsl(var(--muted-foreground))"
-                tick={{ fontSize: 14 }}
+                tick={{ fontSize: 10 }}
               />
               <YAxis
-                label={{ value: "Peso (kg)", angle: -90, position: "insideLeft" }}
+                label={{ value: "Weight (kg)", angle: -90, position: "insideLeft" }}
                 stroke="hsl(var(--muted-foreground))"
+                tick={{ fontSize: 10 }}
               />
               <Tooltip
                 contentStyle={{
@@ -85,11 +86,11 @@ export const ComparisonChart = ({ data }: ComparisonChartProps) => {
                   borderRadius: "8px",
                 }}
                 formatter={(value: number, name: string, props: any) => [
-                  `${value} kg (${props.payload.dataFinal})`,
-                  "Peso",
+                  `${value} kg (${props.payload.endDate})`,
+                  "Weight",
                 ]}
               />
-              <Bar dataKey="pesoFinal" radius={[8, 8, 0, 0]}>
+              <Bar dataKey="finalWeight" radius={[8, 8, 0, 0]}>
                 {chartData.map((entry, index) => (
                   <Cell key={`cell-${index}`} fill={entry.color} />
                 ))}
@@ -98,71 +99,71 @@ export const ComparisonChart = ({ data }: ComparisonChartProps) => {
           </ResponsiveContainer>
 
           {/* Legend */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="bg-primary/5 border border-primary/20 rounded-xl p-4 space-y-2">
+          <div className="grid grid-cols-1 gap-3">
+            <div className="bg-primary/5 border border-primary/20 rounded-xl p-3 space-y-1">
               <div className="flex items-center gap-2">
-                <TrendingDown className="w-5 h-5 text-primary" />
-                <h4 className="font-bold text-foreground">Se Começar Hoje</h4>
+                <TrendingDown className="w-4 h-4 text-primary" />
+                <h4 className="font-bold text-sm text-foreground">If You Start Today</h4>
               </div>
-              <p className="text-sm text-muted-foreground">
-                Você estará no seu peso ideal de{" "}
-                <span className="font-bold text-primary">{data.goalWeight} kg</span> até{" "}
+              <p className="text-xs text-muted-foreground">
+                You'll be at your ideal weight of{" "}
+                <span className="font-bold text-primary">{data.goalWeight} kg</span> by{" "}
                 <span className="font-bold text-primary">
-                  {startTodayEndDate.toLocaleDateString("pt-BR")}
+                  {startTodayEndDate.toLocaleDateString("en-US")}
                 </span>
               </p>
-              <p className="text-2xl font-bold text-primary">
+              <p className="text-lg font-bold text-primary">
                 -{weightDifference.toFixed(1)} kg 🎯
               </p>
             </div>
 
-            <div className="bg-destructive/5 border border-destructive/20 rounded-xl p-4 space-y-2">
+            <div className="bg-destructive/5 border border-destructive/20 rounded-xl p-3 space-y-1">
               <div className="flex items-center gap-2">
-                <AlertCircle className="w-5 h-5 text-destructive" />
-                <h4 className="font-bold text-foreground">Se Adiar 6 Meses</h4>
+                <AlertCircle className="w-4 h-4 text-destructive" />
+                <h4 className="font-bold text-sm text-foreground">If You Delay 6 Months</h4>
               </div>
-              <p className="text-sm text-muted-foreground">
-                Em 6 meses você ainda estará em{" "}
+              <p className="text-xs text-muted-foreground">
+                In 6 months you'll still be at{" "}
                 <span className="font-bold text-destructive">
                   {data.currentWeight} kg
                 </span>{" "}
-                e só começará a emagrecer depois disso
+                and only then start losing weight
               </p>
-              <p className="text-2xl font-bold text-destructive">
-                0 kg perdidos ⏸️
+              <p className="text-lg font-bold text-destructive">
+                0 kg lost ⏸️
               </p>
             </div>
           </div>
         </div>
 
         {/* Impact Message */}
-        <div className="bg-gradient-to-r from-primary/10 to-accent/10 border-2 border-primary/30 rounded-2xl p-8 space-y-4">
-          <h3 className="text-2xl font-bold text-foreground text-center">
-            💪 Cada Dia Conta!
+        <div className="bg-gradient-to-r from-primary/10 to-accent/10 border-2 border-primary/30 rounded-2xl p-4 space-y-3">
+          <h3 className="text-lg font-bold text-foreground text-center">
+            💪 Every Day Counts!
           </h3>
-          <div className="space-y-3 text-center">
-            <p className="text-lg text-foreground">
-              Ao começar hoje, você estará <span className="font-bold text-primary">{weightDifference.toFixed(1)} kg mais leve</span> em apenas{" "}
-              <span className="font-bold text-primary">{Math.ceil((data.estimatedDuration || 0) / 4)} meses</span>
+          <div className="space-y-2 text-center">
+            <p className="text-sm text-foreground">
+              By starting today, you'll be <span className="font-bold text-primary">{weightDifference.toFixed(1)} kg lighter</span> in just{" "}
+              <span className="font-bold text-primary">{Math.ceil((data.estimatedDuration || 0) / 4)} months</span>
             </p>
-            <p className="text-lg text-muted-foreground">
-              Mas se esperar 6 meses para começar, você só alcançará sua meta daqui a{" "}
+            <p className="text-sm text-muted-foreground">
+              But if you wait 6 months to start, you'll only reach your goal in{" "}
               <span className="font-bold text-destructive">
-                {Math.ceil((data.estimatedDuration || 0) / 4) + 6} meses
+                {Math.ceil((data.estimatedDuration || 0) / 4) + 6} months
               </span>
             </p>
-            <div className="pt-4">
-              <p className="text-xl font-bold gradient-text">
-                A diferença? <span className="text-3xl">6 MESES</span> da sua vida!
+            <div className="pt-2">
+              <p className="text-base font-bold gradient-text">
+                The difference? <span className="text-2xl">6 MONTHS</span> of your life!
               </p>
             </div>
           </div>
         </div>
 
         {/* Motivational Quote */}
-        <div className="text-center p-6 bg-card border border-border rounded-2xl">
-          <p className="text-xl font-semibold text-foreground italic">
-            "O melhor momento para começar foi há 6 meses. O segundo melhor momento é AGORA."
+        <div className="text-center p-4 bg-card border border-border rounded-2xl">
+          <p className="text-sm font-semibold text-foreground italic">
+            "The best time to start was 6 months ago. The second best time is NOW."
           </p>
         </div>
       </div>

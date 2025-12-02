@@ -17,28 +17,28 @@ export const AILoadingDemo = ({ data, onComplete }: AILoadingDemoProps) => {
   const phases = [
     { 
       icon: "🧬", 
-      text: "Analisando seu metabolismo...",
-      detail: `IMC: ${data.bmi?.toFixed(1)} • ${weightToLose.toFixed(1)}kg a perder`
+      text: "Analyzing your metabolism...",
+      detail: `BMI: ${data.bmi?.toFixed(1)} • ${weightToLose.toFixed(1)}kg to lose`
     },
     { 
       icon: "🍵", 
-      text: "Selecionando chás personalizados...",
-      detail: "Chá verde, hibisco, gengibre com limão"
+      text: "Selecting personalized teas...",
+      detail: "Green tea, hibiscus, ginger with lemon"
     },
     { 
       icon: "🥗", 
-      text: "Criando cardápio com ingredientes caseiros...",
-      detail: "Abacate, ovos, arroz integral, feijão, frango"
+      text: "Creating meal plan with homemade ingredients...",
+      detail: "Avocado, eggs, brown rice, beans, chicken"
     },
     { 
       icon: "📊", 
-      text: "Calculando sua jornada de emagrecimento...",
-      detail: `${weightToLose.toFixed(1)}kg em ${months} ${months === 1 ? 'mês' : 'meses'}`
+      text: "Calculating your weight loss journey...",
+      detail: `${weightToLose.toFixed(1)}kg in ${months} ${months === 1 ? 'month' : 'months'}`
     },
     { 
       icon: "✨", 
-      text: "Seu plano está pronto!",
-      detail: "100% personalizado pela IA Synjaro"
+      text: "Your plan is ready!",
+      detail: "100% personalized by Synjaro AI"
     },
   ];
 
@@ -63,11 +63,11 @@ export const AILoadingDemo = ({ data, onComplete }: AILoadingDemoProps) => {
   }, [onComplete, phases.length]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4">
-      <div className="max-w-2xl w-full space-y-8">
+    <div className="min-h-screen flex items-center justify-center p-4 safe-area-inset">
+      <div className="w-full max-w-md space-y-6">
         {/* App Preview Frame */}
-        <div className="bg-card border-2 border-border rounded-3xl p-8 shadow-2xl">
-          {/* Fake Phone Header */}
+        <div className="bg-card border-2 border-border rounded-3xl p-6 shadow-2xl">
+          {/* Phone Header */}
           <div className="flex items-center justify-between mb-6 pb-4 border-b border-border">
             <div className="flex items-center gap-2">
               <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center">
@@ -75,7 +75,7 @@ export const AILoadingDemo = ({ data, onComplete }: AILoadingDemoProps) => {
               </div>
               <div>
                 <p className="font-bold text-foreground">Synjaro</p>
-                <p className="text-xs text-muted-foreground">IA Personalizada</p>
+                <p className="text-xs text-muted-foreground">Personalized AI</p>
               </div>
             </div>
             <div className="flex gap-1">
@@ -92,7 +92,7 @@ export const AILoadingDemo = ({ data, onComplete }: AILoadingDemoProps) => {
             </div>
             
             <div className="space-y-2">
-              <p className="text-xl font-bold text-foreground">
+              <p className="text-lg font-bold text-foreground">
                 {phases[currentPhase].text}
               </p>
               <p className="text-sm text-muted-foreground">
@@ -112,11 +112,11 @@ export const AILoadingDemo = ({ data, onComplete }: AILoadingDemoProps) => {
             </div>
 
             {/* Previous Phases Checklist */}
-            <div className="text-left space-y-2 max-w-md mx-auto">
+            <div className="text-left space-y-2">
               {phases.slice(0, currentPhase).map((phase, i) => (
                 <div key={i} className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <Check className="w-4 h-4 text-primary" />
-                  <span>{phase.text}</span>
+                  <Check className="w-4 h-4 text-primary flex-shrink-0" />
+                  <span className="truncate">{phase.text}</span>
                 </div>
               ))}
             </div>
@@ -124,8 +124,8 @@ export const AILoadingDemo = ({ data, onComplete }: AILoadingDemoProps) => {
         </div>
 
         {/* Trust Message */}
-        <p className="text-center text-sm text-muted-foreground">
-          🔒 Suas informações estão seguras e serão usadas apenas para personalizar seu plano
+        <p className="text-center text-sm text-muted-foreground px-4">
+          🔒 Your information is secure and will only be used to personalize your plan
         </p>
       </div>
     </div>
