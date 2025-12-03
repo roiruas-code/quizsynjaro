@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ChevronLeft, ChevronRight, Star } from "lucide-react";
+import { ChevronLeft, ChevronRight, Star, Verified } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import transformation1 from "@/assets/transformation-1.webp";
 import transformation2 from "@/assets/transformation-2.jpg";
@@ -12,6 +12,7 @@ interface Transformation {
   image: string;
   name: string;
   age: number;
+  location: string;
   weight: string;
   time: string;
   testimonial: string;
@@ -21,47 +22,52 @@ const transformations: Transformation[] = [
   {
     id: 1,
     image: transformation1,
-    name: "Valerie D.",
-    age: 50,
-    weight: "88 lbs",
-    time: "8 months",
-    testimonial: "At 50, I managed to lose 88 lbs with Synjaro! The AI helped me choose the right teas and perfect recipes. I've never felt so good in my life.",
+    name: "Sarah M.",
+    age: 47,
+    location: "Austin, TX",
+    weight: "62 lbs",
+    time: "7 months",
+    testimonial: "I was SO skeptical at first, but this app literally changed my life! The AI figured out exactly what teas work for my body. Down 62 lbs and feeling like myself again!",
   },
   {
     id: 2,
     image: transformation2,
-    name: "Michelle S.",
+    name: "Amanda K.",
     age: 52,
-    weight: "77 lbs",
-    time: "7 months",
-    testimonial: "The Synjaro AI personalized everything for me! The natural teas and recipes with homemade ingredients made all the difference.",
+    location: "Phoenix, AZ",
+    weight: "71 lbs",
+    time: "8 months",
+    testimonial: "After menopause, nothing worked. I tried EVERYTHING. Synjaro's AI actually understood my hormonal changes and customized everything. Best investment I've ever made!",
   },
   {
     id: 3,
     image: transformation3,
-    name: "Caroline L.",
-    age: 29,
-    weight: "40 lbs",
-    time: "5 months",
-    testimonial: "Having AI in my pocket changed everything! Every day I received personalized tea and nutrition suggestions.",
+    name: "Jessica T.",
+    age: 31,
+    location: "Denver, CO",
+    weight: "38 lbs",
+    time: "4 months",
+    testimonial: "Post-baby weight was killing my confidence. The daily tea suggestions and meal plans were so easy to follow. I'm in better shape now than before I got pregnant!",
   },
   {
     id: 4,
     image: transformation4,
-    name: "Brittany C.",
-    age: 34,
-    weight: "48 lbs",
-    time: "6 months",
-    testimonial: "Synjaro is amazing! I only used ingredients I had at home and the charts kept me motivated every day.",
+    name: "Lauren W.",
+    age: 36,
+    location: "Nashville, TN",
+    weight: "44 lbs",
+    time: "5 months",
+    testimonial: "What I love most is that everything uses normal grocery store ingredients! No weird supplements or expensive shakes. Just real food and natural teas. It actually works!",
   },
   {
     id: 5,
     image: transformation5,
-    name: "Jennifer O.",
-    age: 41,
-    weight: "55 lbs",
+    name: "Rachel H.",
+    age: 42,
+    location: "Charlotte, NC",
+    weight: "53 lbs",
     time: "6 months",
-    testimonial: "Synjaro's artificial intelligence learned with me! The personalized teas accelerated my results.",
+    testimonial: "The progress charts kept me motivated when I wanted to quit. Watching my weight go down week by week was addicting! My husband started using it too lol",
   },
 ];
 
@@ -83,63 +89,66 @@ export const BeforeAfterGallery = ({ onContinue }: BeforeAfterGalleryProps) => {
   const current = transformations[currentIndex];
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center p-4 py-8 safe-area-inset">
-      <div className="w-full max-w-md space-y-6">
+    <div className="min-h-screen flex flex-col items-center justify-start p-4 pt-6 pb-8 safe-area-inset bg-gradient-to-b from-background to-primary/5">
+      <div className="w-full max-w-md space-y-4">
         {/* Header */}
-        <div className="text-center space-y-2">
-          <h2 className="text-2xl font-bold gradient-text">
-            ✨ Real Transformations with Synjaro
+        <div className="text-center space-y-1">
+          <h2 className="text-xl font-bold text-foreground">
+            Real Results, Real Women
           </h2>
-          <p className="text-sm text-muted-foreground">
-            Incredible results from women who used the AI-powered app
+          <p className="text-xs text-muted-foreground">
+            Join thousands who transformed with Synjaro AI
           </p>
         </div>
 
         {/* Gallery */}
         <div className="relative">
-          <div className="bg-card border border-border rounded-2xl overflow-hidden shadow-elegant">
+          <div className="bg-card border border-border rounded-2xl overflow-hidden shadow-lg">
             {/* Image */}
             <div className="relative aspect-[4/3] bg-muted">
               <img
                 src={current.image}
-                alt={`Transformation of ${current.name}`}
+                alt={`${current.name}'s transformation`}
                 className="w-full h-full object-contain"
               />
-              <div className="absolute top-3 left-3 bg-primary text-primary-foreground px-3 py-1 rounded-full text-xs font-semibold">
+              <div className="absolute top-2 left-2 bg-black/70 text-white px-2 py-0.5 rounded-full text-[10px] font-medium">
                 Before & After
               </div>
-              <div className="absolute top-3 right-3 bg-gradient-to-r from-primary to-accent text-white px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1">
-                <span>🤖</span>
-                <span>Synjaro User</span>
+              <div className="absolute top-2 right-2 bg-primary text-primary-foreground px-2 py-0.5 rounded-full text-[10px] font-bold flex items-center gap-1">
+                <Verified className="w-3 h-3" />
+                Verified
               </div>
             </div>
 
             {/* Content */}
             <div className="p-4 space-y-3">
-              <div className="flex items-start justify-between gap-3">
+              <div className="flex items-start justify-between gap-2">
                 <div>
-                  <h3 className="text-lg font-bold text-foreground">
-                    {current.name}, {current.age} years old
-                  </h3>
-                  <div className="flex items-center gap-3 mt-1 text-muted-foreground text-sm">
-                    <span className="flex items-center gap-1">
-                      <span className="text-lg">⚖️</span>
-                      <span className="font-semibold text-primary">{current.weight}</span> lost
+                  <div className="flex items-center gap-2">
+                    <h3 className="text-base font-bold text-foreground">
+                      {current.name}
+                    </h3>
+                    <span className="text-xs text-muted-foreground">
+                      {current.age} · {current.location}
                     </span>
-                    <span className="flex items-center gap-1">
-                      <span className="text-lg">⏱️</span>
-                      in <span className="font-semibold text-primary">{current.time}</span>
+                  </div>
+                  <div className="flex items-center gap-3 mt-1">
+                    <span className="text-xs text-muted-foreground">
+                      Lost <span className="font-bold text-primary">{current.weight}</span>
+                    </span>
+                    <span className="text-xs text-muted-foreground">
+                      in <span className="font-bold text-primary">{current.time}</span>
                     </span>
                   </div>
                 </div>
                 <div className="flex gap-0.5">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 fill-yellow-500 text-yellow-500" />
+                    <Star key={i} className="w-3 h-3 fill-yellow-500 text-yellow-500" />
                   ))}
                 </div>
               </div>
 
-              <blockquote className="text-sm text-foreground italic border-l-4 border-primary pl-3">
+              <blockquote className="text-xs text-foreground leading-relaxed bg-muted/50 rounded-lg p-3">
                 "{current.testimonial}"
               </blockquote>
             </div>
@@ -148,45 +157,61 @@ export const BeforeAfterGallery = ({ onContinue }: BeforeAfterGalleryProps) => {
           {/* Navigation Buttons */}
           <button
             onClick={handlePrevious}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-3 w-10 h-10 rounded-full bg-card border-2 border-border shadow-lg hover:shadow-elegant hover:scale-110 transition-all flex items-center justify-center group"
+            className="absolute left-0 top-1/3 -translate-y-1/2 -translate-x-2 w-8 h-8 rounded-full bg-card border border-border shadow-md hover:scale-110 transition-all flex items-center justify-center"
             aria-label="Previous"
           >
-            <ChevronLeft className="w-5 h-5 text-foreground group-hover:text-primary transition-colors" />
+            <ChevronLeft className="w-4 h-4 text-foreground" />
           </button>
           <button
             onClick={handleNext}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-3 w-10 h-10 rounded-full bg-card border-2 border-border shadow-lg hover:shadow-elegant hover:scale-110 transition-all flex items-center justify-center group"
+            className="absolute right-0 top-1/3 -translate-y-1/2 translate-x-2 w-8 h-8 rounded-full bg-card border border-border shadow-md hover:scale-110 transition-all flex items-center justify-center"
             aria-label="Next"
           >
-            <ChevronRight className="w-5 h-5 text-foreground group-hover:text-primary transition-colors" />
+            <ChevronRight className="w-4 h-4 text-foreground" />
           </button>
         </div>
 
         {/* Indicators */}
-        <div className="flex justify-center gap-2">
+        <div className="flex justify-center gap-1.5">
           {transformations.map((_, index) => (
             <button
               key={index}
               onClick={() => setCurrentIndex(index)}
-              className={`h-2 rounded-full transition-all ${
-                index === currentIndex ? "w-6 bg-primary" : "w-2 bg-border"
+              className={`h-1.5 rounded-full transition-all ${
+                index === currentIndex ? "w-5 bg-primary" : "w-1.5 bg-border"
               }`}
               aria-label={`Go to transformation ${index + 1}`}
             />
           ))}
         </div>
 
+        {/* Stats */}
+        <div className="grid grid-cols-3 gap-2 py-2">
+          <div className="text-center">
+            <p className="text-lg font-bold text-primary">12,487+</p>
+            <p className="text-[10px] text-muted-foreground">Women Transformed</p>
+          </div>
+          <div className="text-center">
+            <p className="text-lg font-bold text-primary">4.9★</p>
+            <p className="text-[10px] text-muted-foreground">App Rating</p>
+          </div>
+          <div className="text-center">
+            <p className="text-lg font-bold text-primary">47 lbs</p>
+            <p className="text-[10px] text-muted-foreground">Avg. Lost</p>
+          </div>
+        </div>
+
         {/* CTA */}
-        <div className="text-center space-y-3 pt-2">
+        <div className="space-y-2 pt-2">
           <Button
             onClick={onContinue}
             size="lg"
-            className="w-full h-14 text-base font-semibold"
+            className="w-full h-12 text-sm font-semibold shadow-lg"
           >
-            🤖 I Want Synjaro AI With Me!
+            Get My Personalized Plan
           </Button>
-          <p className="text-xs text-muted-foreground">
-            Join 12,000+ women who have already transformed their lives with Synjaro
+          <p className="text-[10px] text-center text-muted-foreground">
+            Join 12,000+ women who transformed their lives
           </p>
         </div>
       </div>
