@@ -166,38 +166,52 @@ const Index = () => {
 
   const getStepTitle = () => {
     const titles: { [key: number]: string } = {
-      1: "👋 What's your age?",
-      2: "📏 What's your height?",
-      3: "⚖️ Current weight",
-      4: "🎯 Your dream weight",
-      5: "What are your problem areas? 🎯",
-      6: "What's your body shape? 👤",
-      7: "When was the last time you were at your ideal weight? ⏰",
-      8: "How did you gain weight? 🤔",
-      9: "Have you tried to lose weight before? 💭",
-      10: "What's your activity level? 🏃",
-      11: "What's your occupation/routine? 💼",
-      12: "How's your sleep quality? 😴",
-      13: "What's your stress level? 😰",
-      14: "How much water do you drink daily? 💧",
-      15: "What's your dietary preference? 🥗",
-      16: "Any dietary restrictions or allergies? 🚫",
-      17: "What are your eating habits? 🍽️",
-      18: "What's your main motivation? 💪",
-      19: "How soon do you want to reach your goal? ⏰",
+      1: "What's your age?",
+      2: "What's your height?",
+      3: "Current weight",
+      4: "Your goal weight",
+      5: "Problem areas",
+      6: "Body shape",
+      7: "Weight history",
+      8: "What caused weight gain?",
+      9: "Past diet attempts",
+      10: "Activity level",
+      11: "Daily routine",
+      12: "Sleep quality",
+      13: "Stress level",
+      14: "Water intake",
+      15: "Dietary preference",
+      16: "Allergies & restrictions",
+      17: "Eating habits",
+      18: "Your motivation",
+      19: "Timeline goal",
     };
     return titles[step] || "";
   };
 
   const getStepSubtitle = () => {
     const subtitles: { [key: number]: string } = {
-      1: "Let's personalize your plan",
-      2: "Between 140cm and 220cm",
-      3: "Be honest for real results",
-      4: "Let's calculate your ideal journey",
+      1: "Let's personalize your journey",
+      2: "Use the slider or type directly",
+      3: "Be honest for accurate results",
+      4: "What weight makes you feel your best?",
       5: "Select all that apply",
+      6: "This helps us understand your body",
+      7: "When did you feel your best?",
+      8: "Understanding this helps us help you",
+      9: "This helps us avoid what didn't work",
+      10: "How active is your lifestyle?",
+      11: "This affects your daily calorie needs",
+      12: "Sleep impacts weight loss significantly",
+      13: "Stress affects metabolism and cravings",
+      14: "Hydration is key to weight loss",
+      15: "We'll customize meals to your preference",
+      16: "Skip if none apply",
+      17: "This helps structure your meal plan",
+      18: "Staying motivated is half the battle",
+      19: "We'll create a realistic timeline for you",
     };
-    return subtitles[step];
+    return subtitles[step] || "";
   };
 
   return (
@@ -207,7 +221,7 @@ const Index = () => {
       title={getStepTitle()}
       subtitle={getStepSubtitle()}
     >
-      <div className="space-y-4 w-full max-w-md mx-auto px-4">
+      <div className="space-y-3 w-full">
         {/* Step 1: Age */}
         {step === 1 && (
           <div className="space-y-3">
@@ -564,29 +578,31 @@ const Index = () => {
           </div>
         )}
 
-        {/* Navigation Buttons */}
-        <div className="pt-6 space-y-3">
-          <Button
-            onClick={handleNext}
-            disabled={!canProceed()}
-            className="w-full h-14 text-base font-semibold touch-feedback group"
-            size="lg"
-          >
-            {step === 19 ? "Analyze My Data 🧠" : "Continue"}
-            <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-          </Button>
-
-          {step > 1 && step <= 19 && (
+        {/* Navigation Buttons - Fixed at bottom */}
+        <div className="fixed bottom-12 left-0 right-0 px-4 pb-2 bg-gradient-to-t from-background via-background to-transparent pt-4 z-20">
+          <div className="max-w-md mx-auto space-y-2">
             <Button
-              onClick={handleBack}
-              variant="outline"
-              className="w-full h-12 text-base"
+              onClick={handleNext}
+              disabled={!canProceed()}
+              className="w-full h-12 text-sm font-semibold group shadow-lg"
               size="lg"
             >
-              <ChevronLeft className="mr-2 w-5 h-5" />
-              Back
+              {step === 19 ? "Analyze My Profile ✨" : "Continue"}
+              <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Button>
-          )}
+
+            {step > 1 && step <= 19 && (
+              <Button
+                onClick={handleBack}
+                variant="ghost"
+                className="w-full h-8 text-xs text-muted-foreground"
+                size="sm"
+              >
+                <ChevronLeft className="mr-1 w-3 h-3" />
+                Back
+              </Button>
+            )}
+          </div>
         </div>
       </div>
     </QuizLayout>
