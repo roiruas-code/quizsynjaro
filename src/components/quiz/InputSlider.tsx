@@ -46,8 +46,8 @@ export const InputSlider = ({
   return (
     <div className="space-y-4">
       <div className="flex justify-between items-center">
-        <Label className="text-lg font-semibold">{label}</Label>
-        <div className="flex items-center gap-2">
+        <Label className="text-sm font-medium">{label}</Label>
+        <div className="flex items-center gap-1.5">
           <Input
             type="number"
             value={localValue}
@@ -55,9 +55,9 @@ export const InputSlider = ({
             min={min}
             max={max}
             step={step}
-            className="w-24 text-right text-lg font-bold"
+            className="w-20 text-right text-base font-bold h-10"
           />
-          <span className="text-lg font-semibold text-muted-foreground">
+          <span className="text-sm font-medium text-muted-foreground">
             {unit}
           </span>
         </div>
@@ -72,17 +72,13 @@ export const InputSlider = ({
         className="w-full"
       />
 
-      <div className="flex justify-between text-sm text-muted-foreground">
-        <span>
-          {min} {unit}
-        </span>
-        <span>
-          {max} {unit}
-        </span>
+      <div className="flex justify-between text-xs text-muted-foreground">
+        <span>{min} {unit}</span>
+        <span>{max} {unit}</span>
       </div>
 
       {description && (
-        <p className="text-sm text-muted-foreground">{description}</p>
+        <p className="text-xs text-muted-foreground text-center">{description}</p>
       )}
     </div>
   );

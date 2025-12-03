@@ -18,24 +18,24 @@ export const MultiSelectCard = ({
   return (
     <button
       onClick={onToggle}
-      className={`relative w-full p-6 rounded-2xl border-2 transition-all duration-300 text-left ${
+      className={`relative w-full p-4 rounded-xl border-2 transition-all duration-200 text-center active:scale-[0.98] ${
         selected
-          ? "border-primary bg-primary/5 shadow-elegant"
-          : "border-border bg-card hover:border-primary/50 hover:shadow-card"
+          ? "border-primary bg-primary/5 shadow-md"
+          : "border-border bg-card hover:border-primary/40"
       }`}
     >
       {selected && (
-        <div className="absolute top-3 right-3 w-6 h-6 rounded-full bg-primary flex items-center justify-center">
-          <Check className="w-4 h-4 text-primary-foreground" />
+        <div className="absolute top-2 right-2 w-5 h-5 rounded-full bg-primary flex items-center justify-center">
+          <Check className="w-3 h-3 text-primary-foreground" />
         </div>
       )}
 
-      {icon && <div className="text-4xl mb-3">{icon}</div>}
+      {icon && <div className="text-2xl mb-2">{icon}</div>}
 
-      <h3 className="text-lg font-semibold text-foreground mb-1">{title}</h3>
+      <h3 className="text-xs font-medium text-foreground">{title}</h3>
 
       {description && (
-        <p className="text-sm text-muted-foreground">{description}</p>
+        <p className="text-[10px] text-muted-foreground mt-1">{description}</p>
       )}
     </button>
   );
