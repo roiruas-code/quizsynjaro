@@ -16,6 +16,7 @@ import { ComparisonChart } from "@/components/quiz/ComparisonChart";
 import { CheckoutPage } from "@/components/quiz/CheckoutPage";
 import { AIMessageBubble } from "@/components/quiz/AIMessageBubble";
 import { LandingPage } from "@/components/LandingPage";
+import { VideoSalesPage } from "@/components/quiz/VideoSalesPage";
 import { calculateAllMetrics } from "@/lib/calculations";
 
 const Index = () => {
@@ -24,7 +25,7 @@ const Index = () => {
   const [analyzing, setAnalyzing] = useState(false);
   const { toast } = useToast();
 
-  const totalSteps = 24;
+  const totalSteps = 25;
 
   useEffect(() => {
     const savedData = localStorage.getItem("quizData");
@@ -70,7 +71,7 @@ const Index = () => {
         setAnalyzing(false);
         setStep(20);
       }, 5000);
-    } else if (step === 24) {
+    } else if (step === 25) {
       localStorage.removeItem("quizData");
       localStorage.removeItem("quizStep");
       window.location.href = "https://pay.kiwify.com.br/seu-produto";
@@ -167,6 +168,10 @@ const Index = () => {
   }
 
   if (step === 24) {
+    return <VideoSalesPage data={quizData} onContinue={handleNext} />;
+  }
+
+  if (step === 25) {
     return <CheckoutPage data={quizData} onCheckout={handleNext} />;
   }
 
