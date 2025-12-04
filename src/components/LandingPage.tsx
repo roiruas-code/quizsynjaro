@@ -51,11 +51,11 @@ export const LandingPage = ({ onStartQuiz }: LandingPageProps) => {
 
           {/* Hero Image */}
           <div className="relative mb-6">
-            <div className="aspect-[4/3] rounded-2xl overflow-hidden border-4 border-primary/20 shadow-elegant">
+            <div className="aspect-[3/4] rounded-2xl overflow-hidden border-4 border-primary/20 shadow-elegant">
               <img 
                 src={femaleImage} 
                 alt="Transform your body" 
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover object-top"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
               <div className="absolute bottom-4 left-4 right-4">
