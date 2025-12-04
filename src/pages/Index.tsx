@@ -15,10 +15,11 @@ import { ResultsDashboard } from "@/components/quiz/ResultsDashboard";
 import { ComparisonChart } from "@/components/quiz/ComparisonChart";
 import { CheckoutPage } from "@/components/quiz/CheckoutPage";
 import { AIMessageBubble } from "@/components/quiz/AIMessageBubble";
+import { LandingPage } from "@/components/LandingPage";
 import { calculateAllMetrics } from "@/lib/calculations";
 
 const Index = () => {
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(0); // Start at 0 for landing page
   const [quizData, setQuizData] = useState<QuizData>({ gender: 'female' });
   const [analyzing, setAnalyzing] = useState(false);
   const { toast } = useToast();
@@ -37,11 +38,16 @@ const Index = () => {
   }, []);
 
   useEffect(() => {
-    if (Object.keys(quizData).length > 0) {
+    if (step > 0 && Object.keys(quizData).length > 0) {
       localStorage.setItem("quizData", JSON.stringify(quizData));
       localStorage.setItem("quizStep", step.toString());
     }
   }, [quizData, step]);
+
+  // Landing page
+  if (step === 0) {
+    return <LandingPage onStartQuiz={() => setStep(1)} />;
+  }
 
   const handleSelection = (key: keyof QuizData, value: any) => {
     setQuizData({ ...quizData, [key]: value });
